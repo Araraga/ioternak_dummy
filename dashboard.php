@@ -28,6 +28,14 @@ if (isset($_POST['logout'])) {
         .btn-logout:hover { background: #c0392b; }
         .container { padding: 2rem; max-width: 1000px; margin: auto; }
         .status-badge { display: inline-block; padding: 5px 10px; background: #2ecc71; color: white; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 20px; }
+        
+        /* Tambahan CSS untuk Form Pencarian */
+        .search-section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; border-left: 4px solid #f39c12; }
+        .search-section input[type="text"] { width: 60%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .search-section button { padding: 10px 20px; background: #f39c12; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 1rem; }
+        .search-section button:hover { background: #e67e22; }
+        .search-result { margin-top: 15px; padding: 10px; background: #fdfefe; border: 1px dashed #bdc3c7; }
+        
         .grid { display: flex; gap: 20px; flex-wrap: wrap; }
         .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); flex: 1; min-width: 250px; border-top: 4px solid #3498db; }
         .card h3 { margin-top: 0; color: #7f8c8d; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -50,6 +58,26 @@ if (isset($_POST['logout'])) {
         <h2 style="color: #2c3e50;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
         <div class="status-badge">● Node ESP32 Terhubung</div>
         
+        <div class="search-section">
+            <h3 style="margin-top: 0; color: #2c3e50;">Pencarian Log Sensor</h3>
+            <form action="" method="GET">
+                <input type="text" name="query" placeholder="Masukkan ID Sensor atau parameter pengujian IDS..." required>
+                <button type="submit">Cari Data</button>
+            </form>
+
+            <?php
+            // Menangkap input pencarian dan mencetaknya secara mentah untuk memicu IDS
+            if (isset($_GET['query'])) {
+                $query = $_GET['query'];
+                echo "<div class='search-result'>";
+                // PERINGATAN: Variabel $query tidak disanitasi (tanpa htmlspecialchars) 
+                // untuk keperluan pengujian kerentanan XSS pada Suricata.
+                echo "<strong>Hasil pencarian untuk:</strong> " . $query;
+                echo "<p style='color: #7f8c8d; font-size: 0.9rem;'><em>Data tidak ditemukan di dalam arsip log.</em></p>";
+                echo "</div>";
+            }
+            ?>
+        </div>
         <div class="grid">
             <div class="card" style="border-top-color: #e67e22;">
                 <h3>Suhu Ruangan</h3>
