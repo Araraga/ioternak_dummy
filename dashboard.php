@@ -61,7 +61,7 @@ if (isset($_POST['logout'])) {
         <div class="search-section">
             <h3 style="margin-top: 0; color: #2c3e50;">Pencarian Log Sensor</h3>
             <form action="" method="GET">
-                <input type="text" name="query" placeholder="Masukkan ID Sensor atau parameter pengujian IDS..." required>
+                <input type="text" name="query" placeholder="Masukkan ID Sensor" required>
                 <button type="submit">Cari Data</button>
             </form>
 
@@ -74,7 +74,7 @@ if (isset($_POST['logout'])) {
                 // untuk keperluan pengujian kerentanan XSS pada Suricata.
                 echo "<strong>Hasil pencarian untuk:</strong> " . $query;
                 echo "<p style='color: #7f8c8d; font-size: 0.9rem;'><em>Data tidak ditemukan di dalam arsip log.</em></p>";
-                echo "</div>";
+                echo "</div>";  
             }
             ?>
         </div>
